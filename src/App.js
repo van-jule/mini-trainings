@@ -1,12 +1,13 @@
 import React from 'react'
-import { useState } from 'react';
 import './index.scss';
 import {Counter} from './components/Counter/Counter'
+import { Modal } from './components/Modal/Modal';
 
 function App() {
   return (
     <div className="App"> 
-    {<Counter/>}
+    {/* {<Counter/>} */}
+    {<Modal/>}
 </div>
   );
 }
