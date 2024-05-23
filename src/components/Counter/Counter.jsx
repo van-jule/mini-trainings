@@ -2,8 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import styles from './Counter.module.scss'
 
-export function Counter(){
-    const [count, setCount] = useState(0);
+export function Counter({count, setCount}){
 
     const onClickMinus = () => 
         {setCount(count -1)
@@ -13,7 +12,7 @@ export function Counter(){
         }
         
     return (
-        <div className={styles.container}>
+    <div className={styles.container}>
     <div >
     <h2>Counter:</h2>
     <h1>{count}</h1> 
