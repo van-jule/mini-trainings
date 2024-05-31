@@ -3,46 +3,31 @@ import "./index.scss";
 import { Counter } from "./components/Counter/Counter";
 import { Modal } from "./components/Modal/Modal";
 import { Quiz } from "./components/Quiz/Quiz";
-import { Userslist } from "./components/Users/Userslist";
+import { MainList } from "./components/Users/Mainlist";
 
 // Тут список пользователей: https://reqres.in/api/users
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [step, setStep] = useState(undefined);
-  const [correct, setCorrect] = useState(0);
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="App">
-      {/* {<Counter count={count} setCount={setCount}/>} */}
+      {/* {<Counter/>} */}
 
       {/* Modal */}
-      {/* <button onClick = {()=>setOpen(true)} className='openModalBtn'>✨ Open Modal</button>
-      <Modal open={open} setOpen={setOpen}>
+      {/* <button onClick = {()=>setOpenModal(true)} className='openModalBtn'>✨ Open Modal</button>
+      <Modal openModal={openModal} setOpenModal={setOpenModal}>
         <h2>Modal</h2>
         <img src="https://media2.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif" />
         <button> Test
         </button></Modal> */}
 
       {/* або спосіб №2 - рендер за умовою */}
-      {/* {open && <Modal open={open} setOpen={setOpen}/>} */}
+      {/* {openModal && <Modal openModal={openModal} setOpenModal={setOpenModal}/>} */}
 
-      {/* <Quiz
-        step={step}
-        setStep={setStep}
-        correct={correct}
-        setCorrect={setCorrect}
-      /> */}
+      {/* <Quiz/> */}
 
-      <Userslist
-        users={users}
-        setUsers={setUsers}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-      />
+      <MainList />
     </div>
   );
 }
