@@ -17,9 +17,9 @@ export const CurrencyConvertor = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        setRates(json.rates);
-        console.log(rates, "rates");
-        // onChangeToPrice(1);
+        ratesRef.current = json.rates;
+        console.log("ratesRef.current", ratesRef.current);
+        onChangeToPrice(1);
       })
       .catch((err) => {
         console.warn(err);
@@ -28,26 +28,31 @@ export const CurrencyConvertor = () => {
   }, []);
 
   const onChangeFromPrice = (value) => {
-    const price = value / rates[fromCurrency];
-    console.log("fromCurrency", fromCurrency);
-    console.log("rates[fromCurrency]", rates[fromCurrency]);
-    const result = price * rates[toCurrency];
+    console.log("value onChangeFromPrice", value);
+    console.log(
+      "ratesRef.current[fromCurrency] onChangeFromPrice",
+      ratesRef.current[fromCurrency]
+    );
+    const price = value / ratesRef.current[fromCurrency];
+    console.log("price onChangeFromPrice", price);
+    console.log("fromCurrency onChangeFromPrice", fromCurrency);
+    const result = price * ratesRef.current[toCurrency];
 
-    setToPrice(result);
+    setToPrice(result.toFixed(2));
     setFromPrice(value);
     console.log("result", result);
   };
 
   const onChangeToPrice = (value) => {
-    const result = (rates[fromCurrency] / rates[toCurrency]) * value;
-    setFromPrice(result);
+    const result =
+      (ratesRef.current[fromCurrency] / ratesRef.current[toCurrency]) * value;
+    setFromPrice(result.toFixed(2));
     setToPrice(value);
-    console.log(value);
   };
 
   useEffect(() => {
     onChangeFromPrice(fromPrice);
-  }, [fromCurrency]);
+  }, [fromCurrency, fromPrice]);
 
   useEffect(() => {
     onChangeToPrice(toPrice);
