@@ -3,7 +3,8 @@ import "./index.scss";
 import { Counter } from "./components/Counter/Counter";
 import { Modal } from "./components/Modal/Modal";
 import { Quiz } from "./components/Quiz/Quiz";
-import { MainList } from "./components/Users/Mainlist";
+import { UsersList } from "./components/Users/UsersList";
+import { CurrencyConvertor } from "./components/CurrencyConvertor/CurrencyConvertor";
 
 // Тут список пользователей: https://reqres.in/api/users
 
@@ -27,7 +28,9 @@ function App() {
 
       {/* <Quiz/> */}
 
-      <MainList />
+      {/* <UsersList /> */}
+
+      <CurrencyConvertor />
     </div>
   );
 }

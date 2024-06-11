@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./users.scss";
+import styles from "./Users.module.scss";
 import { Users } from "./Users";
 import { Success } from "./Success";
 
-export const MainList = ({}) => {
+export const UsersList = ({}) => {
   const [users, setUsers] = useState([]);
   const [invites, setInvites] = useState([]);
   const [success, setSuccess] = useState(false);
@@ -42,7 +42,7 @@ export const MainList = ({}) => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       {success ? (
         <Success count={invites.length} />
       ) : (

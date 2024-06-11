@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Users.module.scss";
 
 export const User = ({
   id,
@@ -11,7 +12,7 @@ export const User = ({
 }) => (
   <li>
     <div>
-      <img className="avatar" src={avatar} alt={last_name} />
+      <img className={styles.avatar} src={avatar} alt={last_name} />
       <div>
         <h3>
           {first_name} {last_name}
@@ -26,7 +27,7 @@ export const User = ({
     </div>
     <img
       onClick={() => onClickInvite(id)}
-      className="action"
+      className={styles.action}
       src={`/assets/${isInvited ? "minus" : "plus"}.svg`}
       alt="Action"
     />

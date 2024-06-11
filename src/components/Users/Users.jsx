@@ -1,6 +1,7 @@
 import React from "react";
 import { Skeleton } from "./Skeleton";
 import { User } from "./User";
+import styles from "./Users.module.scss";
 
 export const Users = ({
   items,
@@ -14,7 +15,7 @@ export const Users = ({
   console.log(searchValue);
   return (
     <>
-      <div className="search">
+      <div className={styles.search}>
         <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
         </svg>
@@ -26,13 +27,13 @@ export const Users = ({
         />
       </div>
       {isLoading ? (
-        <div className="skeleton-list">
+        <div className={styles.skeletonList}>
           <Skeleton />
           <Skeleton />
           <Skeleton />
         </div>
       ) : (
-        <ul className="users-list">
+        <ul className={styles.usersList}>
           {items
             .filter((obj) => {
               const fullName = (obj.first_name + obj.last_name).toLowerCase();
@@ -60,7 +61,7 @@ export const Users = ({
         </ul>
       )}
       {invites.length > 0 && (
-        <button onClick={onClickSendInvites} className="send-invite-btn">
+        <button onClick={onClickSendInvites} className={styles.sendInviteBtn}>
           Відправити запрошення
         </button>
       )}
