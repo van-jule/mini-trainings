@@ -5,6 +5,7 @@ import { Modal } from "./components/Modal/Modal";
 import { Quiz } from "./components/Quiz/Quiz";
 import { UsersList } from "./components/Users/UsersList";
 import { CurrencyConvertor } from "./components/CurrencyConvertor/CurrencyConvertor";
+import PhotosApp from "./components/PhotosApp/PhotosApp";
 
 // Тут список пользователей: https://reqres.in/api/users
 
@@ -30,7 +31,9 @@ function App() {
 
       {/* <UsersList /> */}
 
-      <CurrencyConvertor />
+      {/* <CurrencyConvertor /> */}
+
+      <PhotosApp />
     </div>
   );
 }
