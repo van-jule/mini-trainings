@@ -7,6 +7,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #eff0f1;
+
+  display: unset;
+  align-items: unset;
+  justify-content: unset;
+  height: unset;
 }
 
 * {
@@ -17,36 +22,34 @@ body {
   padding: 50px;
   width: 100%;
   max-width: 1200px;
+  // height: 100vh;
 }
 
-h1 {
+.title {
   font-family: "Merriweather", serif;
 }
 
-.tags {
+.tagsList {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-  li {
-    display: inline-block;
-    padding: 12px 18px;
-    background-color: #fff;
-    border-radius: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 18px;
-    border: 1px solid transparent;
-    transition: all 0.15s ease-in-out;
+.tag {
+  display: inline-block;
+  padding: 12px 18px;
+  background-color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 18px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease-in-out;
 
-    &:hover {
-      border-color: #000;
-    }
-
-    &.active {
-      background-color: #000;
-      color: #fff;
-    }
+  &:hover {
+    border-color: #000;
   }
 }
 
@@ -140,20 +143,20 @@ h1 {
   padding: 0;
   margin: 0;
   margin-top: 40px;
+}
 
-  li {
-    display: inline-block;
-    padding: 10px 17px;
-    background-color: white;
-    font-size: 18px;
-    border-radius: 10px;
-    margin-right: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+.page {
+  display: inline-block;
+  padding: 10px 17px;
+  background-color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  margin-right: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
 
-    &.active {
-      background-color: black;
-      color: #fff;
-    }
-  }
+.active {
+  background-color: black;
+  color: #fff;
 }

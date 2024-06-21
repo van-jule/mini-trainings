@@ -15,8 +15,8 @@ export function Counter() {
   return (
     <div className={styles.container}>
       <div>
-        <h2>Counter:</h2>
-        <h1>{count}</h1>
+        <h2 className={styles.subtitle}>Counter:</h2>
+        <h1 className={styles.title}>{count}</h1>
         <button onClick={onClickMinus} className={styles.minus}>
           - Minus
         </button>

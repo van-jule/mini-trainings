@@ -1,50 +1,91 @@
-import React from "react";
-// import "./index.scss";
+import React, { useState, useEffect } from "react";
 import styles from "./PhotosApp.module.scss";
+import { Collection } from "./Collection";
 
-function Collection({ name, images }) {
-  return (
-    <div className={styles.collection}>
-      <img className={styles.collection__big} src={images[0]} alt="Item" />
-      <div className={styles.collection__bottom}>
-        <img className={styles.collection__mini} src={images[1]} alt="Item" />
-        <img className={styles.collection__mini} src={images[2]} alt="Item" />
-        <img className={styles.collection__mini} src={images[3]} alt="Item" />
-      </div>
-      <h4>{name}</h4>
-    </div>
-  );
-}
+const categories = [
+  { name: "Всі" },
+  { name: "Море" },
+  { name: "Гори" },
+  { name: "Архітектура" },
+  { name: "Міста" },
+];
 
 function PhotosApp() {
+  const [categoryId, setCategoryId] = useState(0);
+  const [collections, setCollections] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setLoading(true);
+
+    const category = categoryId ? `category=${categoryId}` : "";
+    let limit = 3;
+
+    fetch(
+      `https://666fe3a60900b5f872489284.mockapi.io/collections?page=${page}&limit=${limit}&${category}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setCollections(json);
+        console.log("json", json);
+      })
+      .catch((err) => {
+        console.warn(err);
+        alert("Помилка при отриманні данних");
+      })
+      .finally(() => setLoading(false));
+  }, [categoryId, page]);
+
   return (
     <div className={styles.container}>
-      <h1>Моя коллекция фотографий</h1>
+      <h1 className={styles.title}>Моя коллекциія фотографій</h1>
       <div className={styles.top}>
-        <ul className={styles.tags}>
-          <li className={styles.active}>Все</li>
-          <li>Горы</li>
-          <li>Море</li>
-          <li>Архитектура</li>
-          <li>Города</li>
+        <ul className={styles.tagsList}>
+          {categories.map((obj, i) => (
+            <li
+              onClick={() => {
+                setCategoryId(i);
+                setPage(1);
+              }}
+              className={`${styles.tag} ${categoryId === i && styles.active}`}
+              key={obj.name}
+            >
+              {obj.name}
+            </li>
+          ))}
         </ul>
-        <input className={styles.searchInput} placeholder="Поиск по названию" />
-      </div>
-      <div className={styles.content}>
-        <Collection
-          name="Путешествие по миру"
-          images={[
-            "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1560840067-ddcaeb7831d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1531219572328-a0171b4448a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-            "https://images.unsplash.com/photo-1573108724029-4c46571d6490?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-          ]}
+        <input
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          className={styles.searchInput}
+          placeholder="Пошук по назві"
         />
       </div>
+      <div className={styles.content}>
+        {loading ? (
+          <h2>Завантаження...</h2>
+        ) : (
+          collections
+            .filter((obj) =>
+              obj.name.toLowerCase().includes(searchValue.toLowerCase())
+            )
+            .map((obj, index) => (
+              <Collection key={index} name={obj.name} images={obj.photos} />
+            ))
+        )}
+      </div>
       <ul className={styles.pagination}>
-        <li>1</li>
-        <li className={styles.active}>2</li>
-        <li>3</li>
+        {[...Array(3)].map((_, i) => (
+          <li
+            key={i}
+            onClick={() => setPage(i + 1)}
+            className={`${styles.page} ${page === i + 1 && styles.active}`}
+          >
+            {i + 1}
+          </li>
+        ))}
       </ul>
     </div>
   );
